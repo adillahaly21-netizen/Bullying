@@ -1,0 +1,10 @@
+{
+  "name": "Sahabat Aman - Anti-Bullying Sekolah",
+  "short_name": "Sahabat Aman",
+  "description": "Portal edukasi dan pelaporan anti-bullying sekolah",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6faf9",
+  "theme_color": "#0f766e",
+  "icons": []
+}

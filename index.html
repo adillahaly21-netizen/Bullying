@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Sahabat Aman — portal laporan dan edukasi anti-bullying sekolah">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Sahabat Aman — Anti-Bullying Sekolah</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Sahabat Aman beranda"><span class="brand-icon">♡</span><span>Sahabat Aman<small>Portal aman sekolah</small></span></a>
+  <div class="top-actions"><span id="network" class="pill">Memeriksa koneksi…</span><button id="logoutBtn" class="btn btn-quiet hidden">Keluar</button></div>
+</header>
+<main class="wrap">
+  <section id="authView" class="auth-layout">
+    <div class="hero">
+      <span class="eyebrow">SEKOLAH AMAN DIMULAI DARI KITA</span>
+      <h1>Kamu berhak merasa <em>aman.</em></h1>
+      <p>Tempat untuk melaporkan perundungan, mengikuti perkembangan laporan, dan belajar membangun lingkungan sekolah yang saling menghargai.</p>
+      <div class="hero-note"><span>✓</span><div><b>Privasi adalah prioritas</b><br><small>Laporan hanya dapat dilihat oleh pihak yang berwenang sesuai aksesnya.</small></div></div>
+    </div>
+    <div class="panel auth-panel">
+      <div class="tabs"><button id="loginTab" class="tab active">Masuk</button><button id="signupTab" class="tab">Buat akun siswa</button></div>
+      <form id="loginForm" class="stack">
+        <h2>Selamat datang kembali</h2><p class="muted">Masuk menggunakan akun sekolah yang terdaftar.</p>
+        <label>Email sekolah<input type="email" id="loginEmail" required autocomplete="username" placeholder="nama@sekolah.sch.id"></label>
+        <label>Kata sandi<input type="password" id="loginPassword" required autocomplete="current-password" minlength="8" placeholder="Minimal 8 karakter"></label>
+        <button class="btn btn-primary" type="submit">Masuk <span>→</span></button>
+        <button class="text-btn" id="forgotBtn" type="button">Lupa kata sandi?</button>
+      </form>
+      <form id="signupForm" class="stack hidden">
+        <h2>Buat akun siswa</h2><p class="muted">Gunakan email yang dapat kamu akses untuk verifikasi.</p>
+        <label>Nama lengkap<input id="signupName" required maxlength="100" autocomplete="name" placeholder="Nama lengkap"></label>
+        <label>Kelas (opsional)<input id="signupClass" maxlength="30" placeholder="Contoh: VIII A"></label>
+        <label>Email<input type="email" id="signupEmail" required autocomplete="email" placeholder="Email aktif"></label>
+        <label>Kata sandi<input type="password" id="signupPassword" required minlength="8" autocomplete="new-password" placeholder="Minimal 8 karakter"></label>
+        <button class="btn btn-primary" type="submit">Daftar akun <span>→</span></button>
+        <small class="muted">Pendaftaran membuat akun siswa biasa. Hak admin tidak dapat dipilih saat mendaftar.</small>
+      </form>
+      <div id="authMessage" class="notice hidden" role="status"></div>
+    </div>
+  </section>
+
+  <section id="appView" class="hidden">
+    <div class="welcome-row"><div><span class="eyebrow">RUANG AMAN SEKOLAH</span><h1 id="welcomeTitle">Halo!</h1><p id="roleDescription" class="muted">Kamu tidak sendirian.</p></div><div class="welcome-symbol">♡</div></div>
+    <nav class="nav-tabs" aria-label="Navigasi aplikasi">
+      <button class="nav-btn active" data-view="dashboard">Ringkasan</button>
+      <button class="nav-btn" data-view="reports">Laporan</button>
+      <button class="nav-btn" data-view="education">Pusat edukasi</button>
+      <button class="nav-btn staff-only hidden" data-view="stats">Statistik</button>
+    </nav>
+    <div id="appMessage" class="notice hidden" role="status"></div>
+    <section id="dashboardPage" class="page">
+      <div class="stats-grid" id="summaryCards"></div>
+      <div class="content-grid">
+        <article class="panel"><div class="section-heading"><div><span class="eyebrow">MULAI DI SINI</span><h2>Butuh bantuan?</h2></div><span class="round-icon">♡</span></div>
+          <p>Jika kamu mengalami atau menyaksikan perundungan, ceritakan apa yang terjadi. Sampaikan fakta yang kamu ingat; kamu tidak perlu menghadapi situasi ini sendirian.</p>
+          <button class="btn btn-primary" id="newReportBtn">Buat laporan <span>→</span></button>
+          <p class="small muted">Jika ada bahaya langsung, cari guru tepercaya, petugas sekolah, atau layanan darurat setempat sekarang. Jangan menunggu balasan aplikasi.</p>
+        </article>
+        <article class="panel"><div class="section-heading"><div><span class="eyebrow">BELAJAR BERSAMA</span><h2>Kenali perundungan</h2></div><span class="round-icon">✦</span></div>
+          <p>Perundungan dapat berupa tindakan fisik, verbal, sosial, atau daring yang menyakiti atau merendahkan seseorang. Simpan bukti dengan aman dan jangan membagikannya ke publik.</p>
+          <button class="btn btn-secondary" id="educationBtn">Baca panduan</button>
+        </article>
+      </div>
+      <article class="panel recent-panel"><div class="section-heading"><h2 id="recentTitle">Laporan terbaru saya</h2><button class="text-btn" id="allReportsBtn">Lihat semua →</button></div><div id="recentReports" class="report-list"></div></article>
+    </section>
+
+    <section id="reportsPage" class="page hidden">
+      <div class="section-heading page-heading"><div><span class="eyebrow">CATAT DAN TINDAK LANJUTI</span><h2 id="reportsHeading">Laporan saya</h2><p class="muted">Detail laporan tidak ditampilkan kepada pengguna umum.</p></div><button class="btn btn-primary" id="newReportBtn2">+ Laporan baru</button></div>
+      <div id="reportList" class="report-list"></div>
+      <div id="reportComposer" class="panel hidden">
+        <div class="section-heading"><h2>Buat laporan bullying</h2><button class="text-btn" id="cancelReportBtn">Batal</button></div>
+        <form id="reportForm" class="form-grid">
+          <label class="full">Judul singkat<input id="reportTitle" required maxlength="120" placeholder="Contoh: Diejek berulang kali di kelas"></label>
+          <label>Jenis kejadian<select id="reportCategory" required><option value="">Pilih jenis</option><option>Verbal</option><option>Fisik</option><option>Sosial / pengucilan</option><option>Perundungan daring</option><option>Ancaman</option><option>Lainnya</option></select></label>
+          <label>Tanggal kejadian<input id="reportDate" type="date" required></label>
+          <label class="full">Lokasi kejadian<input id="reportLocation" maxlength="160" placeholder="Contoh: koridor lantai 2 (jangan tulis detail yang tidak perlu)"></label>
+          <label class="full">Ceritakan apa yang terjadi<textarea id="reportDescription" required minlength="15" maxlength="6000" rows="6" placeholder="Tuliskan apa yang terjadi, kapan, dan apakah ada orang yang dapat membantu. Hindari dugaan yang tidak kamu ketahui."></textarea></label>
+          <p class="small muted full">Jangan masukkan kata sandi atau informasi pribadi yang tidak diperlukan. Laporan akan dibaca petugas sekolah yang memiliki akses. Unggahan bukti belum diaktifkan pada versi awal ini.</p>
+          <div class="full"><button class="btn btn-primary" type="submit">Kirim laporan dengan aman</button></div>
+        </form>
+      </div>
+      <div id="caseDetail" class="panel hidden"></div>
+    </section>
+
+    <section id="educationPage" class="page hidden">
+      <span class="eyebrow">PENGETAHUAN DAN DUKUNGAN</span><h2>Pusat edukasi</h2>
+      <div class="education-grid">
+        <article class="panel"><span class="edu-icon">♡</span><h3>Apa itu bullying?</h3><p>Perundungan adalah perilaku menyakiti atau merendahkan yang terjadi berulang atau melibatkan ketimpangan kuasa. Konflik biasa juga perlu ditangani, tetapi pendekatan penanganannya bisa berbeda.</p></article>
+        <article class="panel"><span class="edu-icon">◎</span><h3>Jika kamu mengalaminya</h3><p>Utamakan keselamatan. Cari orang dewasa yang dipercaya, catat waktu dan kejadian, serta simpan bukti digital tanpa menyebarkannya. Kamu tidak bersalah karena meminta bantuan.</p></article>
+        <article class="panel"><span class="edu-icon">↗</span><h3>Jika kamu menyaksikan</h3><p>Jangan ikut menertawakan atau menyebarkan konten. Jika aman, dukung orang yang terdampak dan laporkan kepada guru atau konselor. Jangan menghadapi pelaku sendirian jika berisiko.</p></article>
+        <article class="panel"><span class="edu-icon">⚑</span><h3>Jika ada bahaya langsung</h3><p>Jangan menunggu proses laporan digital. Segera cari bantuan guru, konselor, orang tua/wali, petugas sekolah, atau layanan darurat setempat.</p></article>
+      </div>
+      <div class="notice"><b>Untuk sekolah:</b> tentukan petugas penanggung jawab, prosedur eskalasi, waktu respons, dan cara menghubungi bantuan di luar aplikasi sebelum sistem digunakan siswa.</div>
+    </section>
+
+    <section id="statsPage" class="page hidden">
+      <span class="eyebrow">PANTAU TANPA MEMBUKA DATA BERLEBIHAN</span><h2>Statistik laporan</h2>
+      <p class="muted">Angka di bawah mengikuti laporan yang dapat diakses akun Anda. Hindari membagikan rekap kecil yang dapat mengungkap identitas siswa.</p>
+      <div id="statsCards" class="stats-grid"></div><article class="panel"><h3>Jumlah menurut status</h3><div id="statusStats" class="status-bars"></div></article>
+    </section>
+  </section>
+  <footer><span>© Sahabat Aman · Portal anti-bullying sekolah</span><span>Jika dalam bahaya, cari bantuan langsung.</span></footer>
+</main>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./app.js"></script>
+</body>
+</html>
